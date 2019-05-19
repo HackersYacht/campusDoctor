@@ -21,13 +21,7 @@ export default class EditPeriod extends Component {
       lengthofperiod: this.state.lengthofperiod,
       perioddate: this.state.perioddate
     }
-    var pickedperioddate = moment(this.state.perioddate).format("YYYY-MM-D");
-    for (var i = 0; i < this.state.numofperiod; i++){
-      var periodarray = moment(this.state.perioddate).add(1, this.state.perioddate).format("YYYY-MM-D");
-      periodarray.push(periodarray); 
-      this.setState({periodarray})
-    }
-    alert(this.state.periodarray)
+    //alert(this.state.perioddate)
       try {
         await AsyncStorage.setItem('@key_period', JSON.stringify(periodData));
         this.props.navigation.navigate('BottomNavigator')

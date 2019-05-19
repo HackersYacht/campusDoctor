@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, StatusBar, KeyboardAvoidingView, Picker, TextInput, ScrollView, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, StatusBar, AsyncStorage, KeyboardAvoidingView, Picker, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -9,12 +9,32 @@ export default class WelcomeLogin extends Component {
   }
 
   state ={
-    language: '',
-    languages: '',
+    sex: '',
+    college: '',
+    name: '',
+    email: '',
+    pno: '',
+  }
+  
+  _loginData = async () => {
+    var loginData = {
+      name: this.state.name,
+      email: this.state.email,
+      sex: this.state.sex,
+      college: this.state.college,
+      pno: this.state.pno
+    }
+    try {
+      await AsyncStorage.setItem('@key_login', JSON.stringify(loginData));
+        this.props.navigation.navigate('Verify')
+        console.log("Data saved")
+      }catch (error) {
+        alert("failed")
+      }
   }
 
   render() {
-    let {language, languages} = this.state
+    let {sex, college} = this.state
     return (
       <View style={styles.container}>
         <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#263c91', '#6f82c6', '#d71a3a']} style={{height: 80, marginBottom: 10,}}>
@@ -39,25 +59,25 @@ export default class WelcomeLogin extends Component {
           <ScrollView>
             <KeyboardAvoidingView style={{flex: 1, paddingHorizontal: 10}} behavior="padding" enabled>
               <View>
-                <TextInput placeholder="Your full name" style={{textAlign: 'left', color: '#00528e', height: 40, borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
-                <TextInput placeholder="Your email" style={{textAlign: 'left', height: 40, color: '#00528e', borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
-                <Picker selectedValue={this.state.language} style={{height: 50, width: 300, color: '#00528e',}} onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue}) }>
-                  <Picker.Item label="Male" value="M" />
-                  <Picker.Item label="Female" value="F" />
+                <TextInput onChangeText={(name)=>this.setState({name})} placeholder="Your full name" style={{textAlign: 'left', color: '#00528e', height: 40, borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
+                <TextInput onChangeText={(email)=>this.setState({email})} placeholder="Your email" style={{textAlign: 'left', height: 40, color: '#00528e', borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
+                <Picker selectedValue={this.state.sex} style={{height: 50, width: 300, color: '#00528e',}} onValueChange={(itemValue, itemIndex) => this.setState({sex: itemValue}) }>
+                  <Picker.Item label="Male" value="Male" />
+                  <Picker.Item label="Female" value="Female" />
                 </Picker>
 
-                <Picker selectedValue={this.state.languages} style={{height: 50, width: 300, color: '#00528e',}} onValueChange={(itemValue, itemIndex) => this.setState({languages: itemValue}) }>
+                <Picker selectedValue={this.state.college} style={{height: 50, width: 300, color: '#00528e',}} onValueChange={(itemValue, itemIndex) => this.setState({college: itemValue}) }>
                   <Picker.Item label="Makerere University" value="Mak" />
                   <Picker.Item label="Kyambogo University" value="Kyu" />
                 </Picker>  
 
                 <Text style={{textAlign: 'center', fontSize: 18, fontStyle: 'normal', fontWeight: '400', color: '#00528e', paddingVertical: 10,}} >Enter Phone Number for Verification</Text>
 
-                <TextInput placeholder="Your mobile number" style={{textAlign: 'left', height: 40, color: '#00528e', borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
+                <TextInput onChangeText={(pno)=>this.setState({pno})} placeholder="Your mobile number" style={{textAlign: 'left', height: 40, color: '#00528e', borderBottomColor: '#00528e', borderBottomWidth: 2, marginVertical: 7}}/>
               </View>  
 
               <View style={{justifyContent: 'center', alignItems: 'flex-end', marginVertical: 15,}}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Verify')} style={{height: 50, width: 50, borderRadius: 25, backgroundColor: '#00528e', justifyContent: 'center', alignItems: 'center',}}>
+                <TouchableOpacity onPress={()=>this._loginData()} style={{height: 50, width: 50, borderRadius: 25, backgroundColor: '#00528e', justifyContent: 'center', alignItems: 'center',}}>
                   <Icon name="arrow-forward" style={{paddingHorizontal: 15, paddingVertical: 15, color: '#ffffff'}} size={30} />
                 </TouchableOpacity>
               </View> 
@@ -66,9 +86,7 @@ export default class WelcomeLogin extends Component {
         </View>
 
         <View>
-        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#263c91', '#6f82c6', '#d71a3a']} style={{ width: '100%', marginTop: 13,}}>
-          <Text style={{color: '#ffffff', paddingVertical: 7, textAlign: 'center', fontSize: 16, fontStyle: 'italic' }}>CampusDoctor</Text>
-        </LinearGradient>
+        
       </View>
       
       </View>

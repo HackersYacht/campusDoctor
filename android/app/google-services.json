@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "166630060298",
-    "firebase_url": "https://campusdoc-f3364.firebaseio.com",
-    "project_id": "campusdoc-f3364",
-    "storage_bucket": "campusdoc-f3364.appspot.com"
+    "project_number": "113241976146",
+    "firebase_url": "https://campusdoctor-89a35.firebaseio.com",
+    "project_id": "campusdoctor-89a35",
+    "storage_bucket": "campusdoctor-89a35.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:166630060298:android:7f8045271bcc712f",
+        "mobilesdk_app_id": "1:113241976146:android:7f8045271bcc712f",
         "android_client_info": {
           "package_name": "com.campus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "166630060298-pc5ptmoi07irkt75l12l7fv7uvd7lkev.apps.googleusercontent.com",
+          "client_id": "113241976146-gpr9ud7la7db4a0jrgrql0k7qp6u042n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDMKDndjBcaevJErU_rWzHN_cvC-r6aCeY"
+          "current_key": "AIzaSyA1BswalVnUCPWDZExXbI3WisDBm9HAV6Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "166630060298-pc5ptmoi07irkt75l12l7fv7uvd7lkev.apps.googleusercontent.com",
+              "client_id": "113241976146-gpr9ud7la7db4a0jrgrql0k7qp6u042n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

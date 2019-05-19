@@ -1,10 +1,38 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, StatusBar, KeyboardAvoidingView, Picker, TextInput, ScrollView, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, StatusBar, AsyncStorage, KeyboardAvoidingView, Picker, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class WelcomeVerify extends Component {
+  constructor(){
+    super()
+    this.state = {
+      sex: '',
+      college: '',
+      name: '',
+      email: '',
+      pno: '',
+    }
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount')
+    AsyncStorage.getItem("@key_login").then((r)=>{
+      var loginData = JSON.parse(r)
+      console.log('r:'+r)
+     this.setState({
+        name: loginData.name,
+        email: loginData.email,
+        sex: loginData.sex,
+        college: loginData.college,
+        pno: loginData.pno
+      })
+    })
+  }
+
   render() {
+    let {sex, college, name, email, pno} = this.state
+    alert(sex)
     return (
       <View style={styles.container}>
         <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#263c91', '#6f82c6', '#d71a3a']} style={{height: 80, marginBottom: 10,}}>
@@ -40,9 +68,7 @@ export default class WelcomeVerify extends Component {
             </KeyboardAvoidingView>
           </ScrollView>    
         </View>
-        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#263c91', '#6f82c6', '#d71a3a']} style={{ width: '100%', marginTop: 13,}}>
-          <Text style={{color: '#ffffff', paddingVertical: 7, textAlign: 'center', fontSize: 16, fontStyle: 'italic' }}>CampusDoctor</Text>
-        </LinearGradient>
+       
       </View>
     );
   }
